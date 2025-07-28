@@ -6,17 +6,15 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Solo POST permitido' });
+  if (req.method !== "POST") {
+    res.status(405).json({ error: "Solo POST permitido" });
     return;
   }
-
   const { message } = req.body;
   if (!message) {
-    res.status(400).json({ error: 'No hay mensaje' });
+    res.status(400).json({ error: "No hay mensaje" });
     return;
   }
-
   try {
     const completion = await openai.createChatCompletion({
       model: "gpt-4o-mini",
