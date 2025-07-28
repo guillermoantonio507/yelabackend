@@ -1,0 +1,11 @@
+{
+  "name": "yelabackend",
+  "version": "1.0.0",
+  "main": "api/apichats.js",
+  "scripts": {
+    "start": "node api/apichats.js"
+  },
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}
