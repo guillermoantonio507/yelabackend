@@ -1,31 +1,13 @@
 
-import { Configuration, OpenAIApi } from "openai";
+export default function handler(req, res) {
+  if (req.method === 'POST') {
+    const { mensaje } = req.body;
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+    // Puedes agregar tu lógica aquí (como llamadas a IA, procesamiento, etc.)
+    const respuesta = `Hola, recibí tu mensaje: ${mensaje}`;
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    res.status(405).json({ error: "Solo POST permitido" });
-    return;
-  }
-  const { message } = req.body;
-  if (!message) {
-    res.status(400).json({ error: "No hay mensaje" });
-    return;
-  }
-  try {
-    const completion = await openai.createChatCompletion({
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: message }],
-      max_tokens: 1000,
-    });
-    const reply = completion.data.choices[0].message.content;
-    res.status(200).json({ reply });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error con OpenAI API" });
+    res.status(200).json({ respuesta });
+  } else {
+    res.status(405).json({ error: 'Método no permitido' });
   }
 }
