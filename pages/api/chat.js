@@ -1,10 +1,11 @@
 
-export default function handler(req, res) {
+// pages/api/chat.js
+export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { mensaje } = req.body;
+    const { message } = req.body;
 
-    // Puedes agregar tu lógica aquí (como llamadas a IA, procesamiento, etc.)
-    const respuesta = `Hola, recibí tu mensaje: ${mensaje}`;
+    // Aquí iría el código para procesar el mensaje con IA o lógica
+    const respuesta = `Tu mensaje fue: ${message}`;
 
     res.status(200).json({ respuesta });
   } else {
